@@ -1,0 +1,77 @@
+\chapter{Phương trình vi phân I-tô}
+\section{Phương trình vi phân ngẫu nhiên}
+\begin{defn}[Phương trình vi phân ngẫu nhiên]
+    Cho $X = (X_t)_{t \in [0, T]}$ là một quá trình ngẫu nhiên. Khi đó phương trình 
+    \begin{align}\label{defn ptvpnn}
+        dX_t &= a(t,X_t) dt + \sigma(t,X_t)dB_t, \quad t\in [0,T]\\
+        X_0  &= x \in \R. \nonumber
+    \end{align}
+\end{defn}
+\begin{defn}
+    Quá trình ngẫu nhiên $X = (X_t)_{t\in [0,T]}$ được gọi là nghiệm của phương trình vi phân ngẫu nhiên \ref{defn ptvpnn} nếu 
+    \begin{enumerate}
+        \item $X$ là $\ff-$tương thích, tức $X_t$ là $\ff_t-$đo được.
+        \item Các tích phân $\displaystyle \int_0^t{a(s,X_s)ds}$ và $\displaystyle \int_0^t{\sigma(s,X_s)dB_s}$ tồn tại và thoả mãn 
+        \[X_t = x + \int_0^t{a(s,X_s)ds} + \int_0^t{\sigma(s,X_s)dB_s}\quad \forall t \in [0,T].\]
+    \end{enumerate}
+\end{defn}
+\section{Phương trình tuyến tính tổng quát}
+\begin{defn}[Phương trình tuyến tính tổng quát]
+    Phương trình tuyến tính tổng quát có dạng
+    \begin{align*}
+        dX_t &= (a(t)+b(t)X_t)dt + (c(t)+e(t)X_t)dB_t\\
+        X_0&= x \in \R.
+    \end{align*}
+\end{defn}
+\begin{sol*}
+    \begin{enumerate}
+        \item Xét phương trình 
+        \begin{align*}
+            dY_t &= b(t)Y_tdt + e(t)Y_tdB_t \quad \forall t \in [0,T]\\
+            Y_0 &= 1.
+        \end{align*}
+        Áp dụng công thức vi phân I-tô cho $Z_t = \ln{Y_t}$ ta được
+        \begin{align*}
+            dZ_t &= \dfrac{1}{Y_t}dY_t + \dfrac{1}{2}\dfrac{-1}{Y_t^2}(dY_t)^2\\
+            &= \dfrac{b(t)Y_tdt + e(t)Y_tdB_t}{Y_t} + \dfrac{-1}{2Y_t^2}(b(t)Y_tdt + e(t)Y_tdB_t)^2\\
+            &= b(t)dt + e(t)dB_t - \dfrac{e^2(t)}{2}dt\\
+            &= \left(b(t)- \dfrac{e^2(t)}{2}\right)dt + e(t)dB_t.
+        \end{align*}
+        Từ đó thu được
+        \begin{align*}
+            Z_t &= Z_0 + \int_0^t{\left(b(s)- \dfrac{e^2(s)}{2}\right)ds} + \int_0^t{e(s)dB_s}  \\
+            Z_0 &= \ln{Y_0} = \ln{1} = 0.
+        \end{align*}
+        Do đó \[Y_t = \exp{Z_t} = \exp\left(\int_0^t{\left(b(s)- \dfrac{e^2(s)}{2}\right)ds} + \int_0^t{e(s)dB_s}\right).\]
+        \item Đặt $U_t = \dfrac{X_t}{Y_t}$, áp dụng công thức vi phân I-tô ta được
+        \begin{align*}
+            dU_t &= \dfrac{1}{Y_t}dX_t + \dfrac{-X_t}{Y_t^2}dY_t + \dfrac{1}{2}\left(0\cdot (dX_t)^2 + 2\cdot \dfrac{-1}{Y_t^2}dX_tdY_t + \dfrac{2X_t}{Y_t^3}(dY_t)^2\right).
+        \end{align*}
+        Trong đó $dX_tdY_t = e(t)Y_t[c(t)+e(t)X_t]dt$ và $(dY_t)^2 = e^2(t)Y_t^2dt$, nên
+        \begin{align*}
+            dU_t &= \left(\dfrac{a(t)-c(t)e(t)}{Y_t}\right)dt + \dfrac{c(t)}{Y_t}dB_t\\
+            U_t  &= U_0 + \int_0^t \left(\dfrac{a(s)-c(s)e(s)}{Y_s}\right)ds + \int_0^t\dfrac{c(s)}{Y_s}dB_s\\
+            U_0 &= \dfrac{X_0}{Y_0} = x.
+        \end{align*}
+        Từ đó ta thu được $X_t = U_tY_t$.
+    \end{enumerate}
+\end{sol*}
+\begin{exam*}
+    Giải các phương trình sau
+    \begin{enumerate}
+        \item 
+        $\begin{cases}
+            dX_t &= -X_tdt + dB_t, \quad t\in [0,T] \\
+            X_0 &=  x
+         \end{cases}$
+        \item 
+        $\begin{cases}
+            dX_t &= 2dt + X_tdB_t, \quad t\in [0,T] \\
+            X_0 &=  x
+        \end{cases}$
+    \end{enumerate}
+\end{exam*}
+\begin{sol*}
+    
+\end{sol*}
+\section{Phương trình bán tuyến tính}
